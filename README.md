@@ -6,12 +6,14 @@
 
 Vendor-neutral QA checklist for engineers who ship SMS one-time-passcode (OTP) flows. Use it in staging before release, when mocks are not enough.
 
+Maintained by [GetVerifyCode](https://getverifycode.com/). Written for real inbound SMS testing, not marketing filler.
+
 | Resource | Link |
 | --- | --- |
 | Interactive docs | [getverifycode.github.io](https://getverifycode.github.io/) |
+| Guides (GitBook) | [getverifycode.gitbook.io/getverifycode-docs](https://getverifycode.gitbook.io/getverifycode-docs/) |
 | Copy-paste checklist | [CHECKLIST.md](CHECKLIST.md) |
 | Release test matrix | [docs/test-matrix.md](docs/test-matrix.md) |
-| Maintainer | [GetVerifyCode](https://getverifycode.com/) |
 
 ---
 
