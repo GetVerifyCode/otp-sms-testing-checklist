@@ -1,0 +1,31 @@
+name: Checklist item
+description: Propose a new OTP / SMS verification QA check
+title: "[check] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: check
+    attributes:
+      label: Proposed checkbox text
+      description: Keep it short and testable.
+      placeholder: Code expires after the documented window
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      options:
+        - Input and formatting
+        - Delivery
+        - Validation
+        - Security and privacy
+        - Test matrix
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this belongs in a vendor-neutral checklist
+    validations:
+      required: true

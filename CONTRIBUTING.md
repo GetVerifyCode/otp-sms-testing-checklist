@@ -18,4 +18,5 @@ Thanks for improving this checklist.
 
 1. Keep items short and testable.
 2. Prefer checkboxes over prose.
-3. Update the docs site in [GetVerifyCode.github.io](https://github.com/GetVerifyCode/GetVerifyCode.github.io) when the checklist changes.
+3. Update `CHECKLIST.md`, `README.md`, and the docs site in [GetVerifyCode.github.io](https://github.com/GetVerifyCode/GetVerifyCode.github.io) together when the checklist changes.
+4. For matrix rows, also update `docs/test-matrix.md`.

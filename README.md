@@ -1,13 +1,17 @@
 # OTP / SMS Verification Testing Checklist
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Maintained by GetVerifyCode](https://img.shields.io/badge/maintained%20by-GetVerifyCode-0b6e4f.svg)](https://getverifycode.com/)
-[![Docs site](https://img.shields.io/badge/docs-getverifycode.github.io-14212b.svg)](https://getverifycode.github.io/)
+[![Maintained by GetVerifyCode](https://img.shields.io/badge/maintained%20by-GetVerifyCode-3f72af.svg)](https://getverifycode.com/)
+[![Docs site](https://img.shields.io/badge/docs-getverifycode.github.io-112d4e.svg)](https://getverifycode.github.io/)
 
 Vendor-neutral QA checklist for engineers who ship SMS one-time-passcode (OTP) flows. Use it in staging before release, when mocks are not enough.
 
-**Docs site:** [getverifycode.github.io](https://getverifycode.github.io/)  
-**Maintainer:** [GetVerifyCode](https://getverifycode.com/)
+| Resource | Link |
+| --- | --- |
+| Interactive docs | [getverifycode.github.io](https://getverifycode.github.io/) |
+| Copy-paste checklist | [CHECKLIST.md](CHECKLIST.md) |
+| Release test matrix | [docs/test-matrix.md](docs/test-matrix.md) |
+| Maintainer | [GetVerifyCode](https://getverifycode.com/) |
 
 ---
 
@@ -16,13 +20,12 @@ Vendor-neutral QA checklist for engineers who ship SMS one-time-passcode (OTP) f
 - [Why this exists](#why-this-exists)
 - [How to use it](#how-to-use-it)
 - [Checklist](#checklist)
-  - [Input and formatting](#input-and-formatting)
-  - [Delivery](#delivery)
-  - [Validation](#validation)
-  - [Security and privacy](#security-and-privacy)
+- [Suggested test matrix](#suggested-test-matrix)
 - [Testing with real inbound SMS](#testing-with-real-inbound-sms)
 - [Pass criteria](#pass-criteria)
+- [Repository layout](#repository-layout)
 - [Contributing](#contributing)
+- [Security](#security)
 - [License](#license)
 
 ---
@@ -43,7 +46,7 @@ Most of these only show up with **real inbound SMS**, not with mocked providers.
 
 ## How to use it
 
-1. Copy the checklist into your QA ticket or test plan.
+1. Copy [CHECKLIST.md](CHECKLIST.md) into your QA ticket, or use the [interactive docs](https://getverifycode.github.io/).
 2. Run it against a staging build that can send real SMS.
 3. Record p50 / p95 delivery time for at least one country.
 4. Fail the release if any **Security and privacy** item is unchecked.
@@ -81,6 +84,19 @@ Most of these only show up with **real inbound SMS**, not with mocked providers.
 - [ ] Codes are stored hashed (or equivalent) with a hard expiry
 - [ ] Stronger factors (passkeys, authenticator apps) are offered for high-risk actions
 
+## Suggested test matrix
+
+| Scenario | Assert |
+| --- | --- |
+| Domestic long number | Code arrives within SLO; E.164 paste works |
+| International number | Country picker and dial code stay aligned |
+| Immediate resend | Cooldown shows; previous code is rejected |
+| Expired code | Clear expired/invalid message; new code works |
+| Provider reject | Readable error; no silent hang |
+| Log / analytics spot check | OTP string never appears in events or traces |
+
+Full printable sheet: [docs/test-matrix.md](docs/test-matrix.md).
+
 ## Testing with real inbound SMS
 
 For end-to-end tests across countries, temporary inbound numbers help you exercise live carrier routes without tying QA to personal SIMs.
@@ -99,9 +115,26 @@ Treat the release as **not ready** if:
 - p95 delivery exceeds your product SLO, or
 - Resend does not invalidate the previous code
 
+## Repository layout
+
+```text
+.
+├── README.md                 # Overview and full checklist
+├── CHECKLIST.md              # Copy-paste version for tickets
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
+├── docs/test-matrix.md       # Release matrix template
+└── .github/ISSUE_TEMPLATE/   # Checklist item proposal form
+```
+
 ## Contributing
 
 Issues and pull requests with additional checks are welcome. Prefer concrete, reproducible items over marketing language. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md). Do not open public issues with OTP samples or secrets.
 
 ## License
 
